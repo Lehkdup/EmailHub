@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  email-exporter:
+    build: .
+    container_name: email-exporter-app
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_APPLICATION_NAME: email-exporter
+      SPRING_SMTP_SERVER: 127.0.0.1
+      SPRING_SMTP_PORT: 8025
+      SPRING_SMTP_USERNAME: ex@mail.com
+      SPRING_SMTP_PASSWORD: 8025
+    restart: unless-stopped

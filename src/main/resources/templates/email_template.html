@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body style="font-family: Helvetica, sans-serif; background-color: #f5f7fa; margin: 0; padding: 20px;">
+<div style="background: #ffffff; border-radius: 10px; padding: 25px; max-width: 600px; margin: auto; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+
+  <h2 style="color: #333333;">📝 Request from:
+    <span th:text="${emailRequest.firstName}">First</span>
+    <span th:text="${emailRequest.lastName}">Last</span>
+  </h2>
+
+  <div style="margin-top: 20px;">
+    <div><strong style="color: #555;">Email:</strong> <span th:text="${emailRequest.email}">email@example.com</span></div>
+    <div><strong style="color: #555;">Address:</strong> <span th:text="${emailRequest.address}">Street 52</span></div>
+    <div><strong style="color: #555;">City:</strong> <span th:text="${emailRequest.city}">Zürich</span></div>
+    <div><strong style="color: #555;">ZIP-Code:</strong> <span th:text="${emailRequest.zipCode}">8032</span></div>
+    <div><strong style="color: #555;">Country:</strong> <span th:text="${emailRequest.country}">Switzerland</span></div>
+    <div><strong style="color: #555;">Message:</strong> <span th:text="${emailRequest.message}">Hello!</span></div>
+    <div><strong style="color: #555;">Subscribed to Newsletter:</strong>
+      <span th:text="${emailRequest.subscribeToNewsletter == 'true'} ? '✅ Yes' : '❌ No'">Yes</span>
+    </div>
+  </div>
+
+  <!-- ⭐ FAVORITES SECTION -->
+  <div style="margin-top: 30px; background-color: #f0f8ff; padding: 20px; border-radius: 8px;" th:if="${emailRequest.favorites != null}">
+    <h3 style="color: #333;">⭐ Favorites</h3>
+    <div th:each="fav : ${emailRequest.favorites}" style="display: flex; margin-bottom: 20px; gap: 15px; align-items: flex-start;">
+
+      <div style="margin-bottom: 20px; gap: 40px; margin-right: 100px;">
+        <div><strong>Name:</strong> <span th:text="${fav.name}">Favorite Name</span></div>
+        <div><strong>Type:</strong> <span th:text="${fav.type}">Hotel</span></div>
+        <div><strong>Country:</strong> <span th:text="${fav.country}">Japan</span></div>
+        <div><a th:href="${fav.url}" style="color: #3788d8;">🔗 View Page</a></div>
+      </div>
+      <img th:src="${fav.image}" alt="Favorite Image" style="width: 120px; height: auto; border-radius: 5px; object-fit: cover;" />
+
+    </div>
+  </div>
+
+  <!-- 🗓️ PLANNER SECTION -->
+  <div style="margin-top: 30px; background-color: #fff9e6; padding: 20px; border-radius: 8px;" th:if="${emailRequest.plannerEvents != null}">
+    <h3 style="color: #333;">🗓️ Planner Events</h3>
+    <div th:each="plan : ${emailRequest.plannerEvents}" style="display: flex; margin-bottom: 20px; gap: 20px; align-items: flex-start;">
+
+      <!-- Text Left -->
+      <div style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
+        <div><strong>Start:</strong> <span th:text="${plan.start}">March 4, 2025</span></div>
+        <div><strong>End:</strong> <span th:text="${plan.end}">March 6, 2025</span></div>
+        <div><strong>Title:</strong> <span th:text="${plan.title}">Onsen Trip</span></div>
+        <div><strong>Type:</strong> <span th:text="${plan.type}">Hotel</span></div>
+        <div><strong>Country:</strong> <span th:text="${plan.country}">Japan</span></div>
+        <div><a th:href="${plan.link}" style="color: #3788d8;">🔗 View Page</a></div>
+      </div>
+
+      <!-- Image Right -->
+      <img th:src="${plan.image}" alt="Planner Image" style="width: 120px; height: auto; border-radius: 5px; object-fit: cover; flex-shrink: 0;" />
+    </div>
+  </div>
+
+
+
+</div>
+</body>
+</html>
